@@ -2,11 +2,12 @@ package br.net.lavanderia.login.model;
 
 import java.io.Serializable;
 
-public class Login implements Serializable {
+public class Login implements Serializable{
   private String login;
-  private int senha;
+  private String senha;
 
-  public Login(String login, int senha) {
+  public Login(String login, String senha) {
+    super();
     this.login = login;
     this.senha = senha;
   }
@@ -19,15 +20,11 @@ public class Login implements Serializable {
     this.login = login;
   }
 
-  public int getSenha() {
+  public String getSenha() {
     return senha;
   }
 
-  public void setSenha(int senha) {
+  public void setSenha(String senha) {
     this.senha = senha;
-  }
-
-  public Login() {
-    super();
   }
 }

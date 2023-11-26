@@ -1,39 +1,33 @@
-package br.net.lavanderia.usuario.model;
+package br.net.lavanderia.usuario.DTO;
+
 import java.io.Serializable;
-import jakarta.persistence.*;
 
-@Entity
-@Table(name="usuario")
-public class Usuario implements Serializable{
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name="id")
+public class UsuarioDTO implements Serializable {
   private Long id;
-
-  @Column(name="nome")
   private String nome;
-
-  @Column(name="login")
   private String login;
-
-  @Column(name="senha")
-  private String senha;
-
-  @Column(name="perfil")
-  private String perfil;
-
-  @Column(name="cpf")
   private String cpf;
-
-  @Column(name="telefone")
+  private String perfil;
   private String telefone;
-                             
-  @Column(name="dt_nascimento")
   private String dtNascimento;
+  private EnderecoDTO endereco;
 
-  @OneToOne(cascade=CascadeType.ALL)
-  @JoinColumn(name="end_id")
-  private Endereco endereco;
+  public UsuarioDTO(){
+    super();
+  }
+
+  public UsuarioDTO(Long id, String nome, String login, String cpf, String perfil, 
+  String telefone, String dtNascimento,    EnderecoDTO endereco) {
+    super();
+    this.id = id;
+    this.nome = nome;
+    this.login = login;
+    this.cpf = cpf;
+    this.perfil = perfil;
+    this.telefone = telefone;
+    this.endereco = endereco;
+    this.dtNascimento = dtNascimento;
+  }
 
   public Long getId() {
     return id;
@@ -59,12 +53,12 @@ public class Usuario implements Serializable{
     this.login = login;
   }
 
-  public String getSenha() {
-    return senha;
+  public String getCpf() {
+    return cpf;
   }
 
-  public void setSenha(String senha) {
-    this.senha = senha;
+  public void setCpf(String cpf) {
+    this.cpf = cpf;
   }
 
   public String getPerfil() {
@@ -75,14 +69,6 @@ public class Usuario implements Serializable{
     this.perfil = perfil;
   }
 
-  public String getCpf() {
-    return cpf;
-  }
-
-  public void setCpf(String cpf) {
-    this.cpf = cpf;
-  }
-
   public String getTelefone() {
     return telefone;
   }
@@ -91,11 +77,11 @@ public class Usuario implements Serializable{
     this.telefone = telefone;
   }
 
-  public Endereco getEndereco() {
+  public EnderecoDTO getEndereco() {
     return endereco;
   }
 
-  public void setEndereco(Endereco endereco) {
+  public void setEndereco(EnderecoDTO  endereco) {
     this.endereco = endereco;
   }
 
@@ -107,4 +93,8 @@ public class Usuario implements Serializable{
     this.dtNascimento = dtNascimento;
   }
 
+
+  // private int gerarSenha(){
+  //   return (int)(Math.random()*8999) + 1000;
+  // }
 }
