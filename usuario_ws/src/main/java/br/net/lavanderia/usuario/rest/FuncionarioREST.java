@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.net.lavanderia.login.model.Login;
 import br.net.lavanderia.usuario.DTO.FuncionarioDTO;
 import br.net.lavanderia.usuario.DTO.UsuarioDTO;
+import br.net.lavanderia.usuario.model.Login;
 import br.net.lavanderia.usuario.model.Usuario;
 import br.net.lavanderia.usuario.repository.UsuarioRepository;
 
@@ -32,11 +32,7 @@ public class FuncionarioREST {
   @Autowired
   private ModelMapper mapper;
 
-
-  public static List<UsuarioDTO> lista = new ArrayList<UsuarioDTO>();
-
   @GetMapping("/funcionario")
-  @ResponseStatus(HttpStatus.CREATED)
   public List<FuncionarioDTO> listarTodos(){
     return repo.findAll().stream()
                .filter(f -> f.getPerfil().equals("FUNC"))
@@ -45,7 +41,8 @@ public class FuncionarioREST {
   }
 
   @PostMapping("/funcionario")
-  public FuncionarioDTO insereFuncionario(@RequestBody FuncionarioDTO funcionario){
+  @ResponseStatus(HttpStatus.CREATED)
+  public FuncionarioDTO insere(@RequestBody FuncionarioDTO funcionario){
     repo.save(mapper.map(funcionario, Usuario.class));
 
     Usuario usuario = repo.findAll().stream()
@@ -56,7 +53,7 @@ public class FuncionarioREST {
   }
 
   @PutMapping("/funcionario/{id}")
-  public FuncionarioDTO alteraFuncionario(@PathVariable Long id,
+  public FuncionarioDTO altera(@PathVariable Long id,
                                           @RequestBody FuncionarioDTO funcionario){
     Usuario usuario = repo.findById(id).orElse(null);
     if(usuario != null){
