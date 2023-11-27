@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.net.lavanderia.login.model.Login;
 import br.net.lavanderia.usuario.DTO.UsuarioDTO;
+import br.net.lavanderia.usuario.model.Login;
 import br.net.lavanderia.usuario.model.Usuario;
 import br.net.lavanderia.usuario.repository.UsuarioRepository;
 

@@ -19,6 +19,16 @@
       "projectName": "usuario_ws",
       "args": "",
       "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "type": "java",
+      "name": "Spring Boot-PedidoWsApplication<pedido_ws>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "br.net.lavanderia.pedido_ws.PedidoWsApplication",
+      "projectName": "pedido_ws",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
     }
   ]
 }

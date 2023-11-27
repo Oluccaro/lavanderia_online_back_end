@@ -1,4 +1,4 @@
-package br.net.lavanderia.login.model;
+package br.net.lavanderia.usuario.model;
 
 import java.io.Serializable;
 
