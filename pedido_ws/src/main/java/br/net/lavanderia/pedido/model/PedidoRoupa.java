@@ -71,22 +71,5 @@ public class PedidoRoupa {
   public void setQuantidade(Integer quantidade) {
     this.quantidade = quantidade;
   }
-
-  // @Override
-  // public int hashCode() {
-  //   return Objects.hash();
-  // }
-
-  // @Override
-  // public boolean equals(Object obj) {
-  //   PedidoRoupaKey pedidoRoupaKey = (PedidoRoupaKey) obj;
-  //   if(pedidoRoupaKey.getIdPedido() == this.getIdPedido() &&
-  //     pedidoRoupaKey.getIdRoupa() == this.getIdRoupa()){
-  //       return true;
-  //   }
-  //   else {
-  //     return false;
-  //   }
-  // }
   
 }

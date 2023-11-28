@@ -15,7 +15,7 @@
       "name": "Spring Boot-UsuarioWsApplication<usuario_ws>",
       "request": "launch",
       "cwd": "${workspaceFolder}",
-      "mainClass": "br.net.lavanderia.usuario_ws.UsuarioWsApplication",
+      "mainClass": "br.net.lavanderia.usuario.UsuarioWsApplication",
       "projectName": "usuario_ws",
       "args": "",
       "envFile": "${workspaceFolder}/.env"
@@ -25,7 +25,17 @@
       "name": "Spring Boot-PedidoWsApplication<pedido_ws>",
       "request": "launch",
       "cwd": "${workspaceFolder}",
-      "mainClass": "br.net.lavanderia.pedido_ws.PedidoWsApplication",
+      "mainClass": "br.net.lavanderia.pedido.PedidoWsApplication",
+      "projectName": "pedido_ws",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "type": "java",
+      "name": "Spring Boot-PedidoWsApplication<pedido_ws>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "br.net.lavanderia.pedido.PedidoWsApplication",
       "projectName": "pedido_ws",
       "args": "",
       "envFile": "${workspaceFolder}/.env"

@@ -27,6 +27,21 @@ public class Pedido {
   @Column(name="id_cliente")
   private Long idCliente; 
 
+  @OneToMany
+  @JoinTable(name = "pedido_roupa",
+    joinColumns = @JoinColumn(name = "id_pedido"),
+    inverseJoinColumns = @JoinColumn(name ="id_roupa")
+  )
+  private List<Roupa> roupas;
+
+  public List<Roupa> getRoupas() {
+    return roupas;
+  }
+
+  public void setRoupas(List<Roupa> roupas) {
+    this.roupas = roupas;
+  }
+
   public Pedido() {
   }
 

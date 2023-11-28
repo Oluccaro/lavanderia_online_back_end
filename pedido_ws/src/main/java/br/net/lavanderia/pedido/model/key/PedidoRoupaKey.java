@@ -1,6 +1,7 @@
 package br.net.lavanderia.pedido.model.key;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
@@ -37,5 +38,21 @@ public class PedidoRoupaKey implements Serializable{
 
   public void setIdRoupa(Long idRoupa) {
     this.idRoupa = idRoupa;
+  }
+  @Override
+  public int hashCode() {
+    return Objects.hash();
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    PedidoRoupaKey pedidoRoupaKey = (PedidoRoupaKey) obj;
+    if(pedidoRoupaKey.getIdPedido() == this.getIdPedido() &&
+      pedidoRoupaKey.getIdRoupa() == this.getIdRoupa()){
+        return true;
+    }
+    else {
+      return false;
+    }
   }
 }
