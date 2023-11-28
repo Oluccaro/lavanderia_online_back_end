@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.net.lavanderia.pedido.DTO.PedidoRoupaDTO;
 import br.net.lavanderia.pedido.DTO.RoupaDTO;
 import br.net.lavanderia.pedido.DTO.RoupaQtdDTO;
+import br.net.lavanderia.pedido.mapper.PedidoRoupaMapper;
 import br.net.lavanderia.pedido.DTO.RoupaDTO;
 import br.net.lavanderia.pedido.model.Pedido;
 import br.net.lavanderia.pedido.model.PedidoRoupa;
@@ -37,47 +38,19 @@ public class PedidoRoupaREST {
   @Autowired
   private ModelMapper mapper;
 
+  private PedidoRoupaMapper pedidoRoupaMapper = new PedidoRoupaMapper();
 
   @GetMapping("/pedidoroupa")
   public List<PedidoRoupaDTO> listarTodos(){
     List<PedidoRoupaDTO> lista = new ArrayList<PedidoRoupaDTO>();
     repo.findAll().stream().forEach(
-      p -> this.addPedidoRoupaDTO(p, lista)
+      p -> pedidoRoupaMapper.toListPedidoRoupaDTO(p, lista)
     );
     return lista;
   }
 
 
-  private void addPedidoRoupaDTO(PedidoRoupa p, List<PedidoRoupaDTO> lista) {
-    boolean update = false;
-    Pedido pedido = p.getPedido();
-    PedidoRoupaDTO pedRoupaDTO = lista.stream().filter(i -> i.getId() == pedido.getId()).findFirst().orElse(null);
-    if(pedRoupaDTO == null){
-      update = true;
-      pedRoupaDTO = new PedidoRoupaDTO(
-        pedido.getId(), 
-        pedido.getStatus(), 
-        pedido.getValor(), 
-        pedido.getDataPedido(), 
-        pedido.getDtEntregaPrevista(),
-        pedido.getIdCliente() 
-      );
-    }
-    Roupa r = p.getRoupa();
-    RoupaQtdDTO roupa = new RoupaQtdDTO(
-      r.getId(),
-      r.getPreco(),
-      r.getPrazo(),
-      r.getDescricao(),
-      r.getImagemDescr(),
-      r.getImagem(),
-      p.getQuantidade()
-    );
-    pedRoupaDTO.addRoupas(roupa);
-    if(update){
-      lista.add(pedRoupaDTO);
-    }
-  }
+  
 
   // @GetMapping("/pedidoroupa")
   // public List<PedidoRoupa> listarTodos(){
