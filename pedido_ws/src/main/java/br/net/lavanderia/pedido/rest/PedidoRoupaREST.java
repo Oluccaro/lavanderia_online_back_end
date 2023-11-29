@@ -34,19 +34,37 @@ public class PedidoRoupaREST {
 
   @Autowired
   private PedidoRoupaRepository repo;
+
+  @Autowired
+  private PedidoRepository pedidoRepo;
   
   @Autowired
   private ModelMapper mapper;
-
-  private PedidoRoupaMapper pedidoRoupaMapper = new PedidoRoupaMapper();
 
   @GetMapping("/pedidoroupa")
   public List<PedidoRoupaDTO> listarTodos(){
     List<PedidoRoupaDTO> lista = new ArrayList<PedidoRoupaDTO>();
     repo.findAll().stream().forEach(
-      p -> pedidoRoupaMapper.toListPedidoRoupaDTO(p, lista)
+      p -> PedidoRoupaMapper.toListPedidoRoupaDTO(p, lista)
     );
     return lista;
+  }
+  @PostMapping("/pedidoroupa")
+  @ResponseStatus(HttpStatus.CREATED)
+  public PedidoRoupaDTO insere(@RequestBody PedidoRoupaDTO pedidoRoupaDTO){
+    List<PedidoRoupa> pedidoRoupa = PedidoRoupaMapper.toPedidoRoupa(pedidoRoupaDTO);
+    Pedido pedido = pedidoRoupa.get(0).getPedido();
+    pedidoRepo.save(pedido);
+    // pedido = pedidoRepo.findAll().stream().filter(p -> 
+    //   p.getDataPedido().equals(pedidoRoupaDTO.getDataPedido()) &&
+    //   p.getIdCliente() == pedidoRoupaDTO.getIdCliente()
+    // ).findAny().orElse(null);
+    List<PedidoRoupaDTO> lista = new ArrayList<PedidoRoupaDTO>();
+    pedidoRoupa.stream().forEach(p ->{
+      repo.save(p);
+      PedidoRoupaMapper.toListPedidoRoupaDTO(p, lista);
+    });
+    return lista.get(0);
   }
 
 

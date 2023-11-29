@@ -25,6 +25,18 @@ public class Roupa  {
   @Column(name="imagem")
   private String imagem;
 
+  public Roupa() {
+  }
+
+  public Roupa(Long id, Double preco, Integer prazo, String descricao, String imagemDescr, String imagem) {
+    this.id = id;
+    this.preco = preco;
+    this.prazo = prazo;
+    this.descricao = descricao;
+    this.imagemDescr = imagemDescr;
+    this.imagem = imagem;
+  }
+
   public Long getId() {
     return id;
   }
