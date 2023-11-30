@@ -21,7 +21,7 @@ CREATE TABLE endereco (
 CREATE TABLE usuario (
 	id INT PRIMARY KEY auto_increment,
     nome VARCHAR(255),
-    login VARCHAR(255),
+    login VARCHAR(255) unique,
 	senha VARCHAR(255),
     salt VARCHAR(512),
     cpf VARCHAR(14),
@@ -77,20 +77,18 @@ VALUES
 ('85015-100', 'Travessa Social', '65', 'Santa Cruz', 'Guarapuava', 'PR', 4109401, null, 42, 7583, '65'),
 ('83010-160', 'Rua Irati', 'casa', 'Cruzeiro', 'São José dos Pinhais', 'PR', 4125506, null, 41, 7885, '12');
 
-INSERT INTO usuario (nome, login, senha, cpf, perfil, telefone, end_id, dt_nascimento)
+INSERT INTO usuario (nome, login, senha, salt, cpf, perfil, telefone, end_id, dt_nascimento)
 VALUES
-('João Clienteson', 'joao-cliente@email.com', '1234', '111.111.111-11', 'CLIENTE', '4199999-9999', 1, null),
-('Maria Funcionaria', 'maria-funcionaria@email.com', '1234', '222.222.222-22', 'FUNC', '4199999-9999', null, '2020-12-15'),
-('José Cliente', 'jose-cliente@email.com', '1234', '333.333.333-33', 'CLIENTE', '4199999-9999', 3, null),
-('Joana Cliente', 'joana-cliente@email.com', '1234', '444.444.444-44', 'CLIENTE', '4199999-9999', 4, null),
-('Joaquina Cliente', 'joaquina-cliente@email.com', '1234', '555.555.555-55', 'CLIENTE', '4199999-9999', 5, null),
-('Mario Funcionário', 'mario-funcionario@email.com', '1234', '666.666.666-66', 'FUNC', NULL, NULL, '1989-04-15'),
-('Juca do Teste', 'jucateste96@email.com', '8638', '98765432199', 'CLIENTE', '41999999999', 6, null),
-('juquietas', 'jq@email.com', '7035', '98765432199', 'CLIENTE', '419987987987', 7, null),
-('Juca do Teste', 'asd@aw', '383', '98765432199', 'CLIENTE', '41999999999', 8, null),
-('Juca do Teste', 'lucasfnunes96@gmail.com', '7415', '98765432199', 'CLIENTE', '41999999999', null, null),
-('lucas.cazionato@ufpr.br', 'lucas.cazionato@ufpr.br', '6408', NULL, 'CLIENTE', NULL, 2, null),
-('lucascazidddd@ufpr.br', 'lucascazidddd@ufpr.br', '1933', NULL, 'CLIENTE', NULL, 5, null);
+('Maria', 'maria.funcionaria@email.com', '1111', '111.111.111-11', 'FUNC', '(41) 99999-9991', 1, '1991-01-01'),
+('Mário', 'mario.funcionario@email.com', '2222', '222.222.222-22', 'FUNC', '(41) 99999-9992', 2, '1992-02-02'),
+('João', 'joao.cliente@email.com', '3333', '333.333.333-33', 'CLIENTE', '(41) 99999-9993', 3, '1993-03-03'),
+('José', 'jose.cliente@email.com', '4444', '444.444.444-44', 'CLIENTE', '(41) 99999-9994', 4, '1994-04-04'),
+('Joana', 'joana.cliente@email.com', '5555', '555.555.555-55', 'CLIENTE', '(41) 99999-9995', 5, '1995-05-05'),
+('Joaquina', 'joaquina.cliente@email.com', '6666', '666.666.666-66', 'CLIENTE', '(41) 99999-9996', 6, '1996-06-06'),
+('Lucas', 'lucas.funcionario@email.com', '0000', '000.000.000-00', 'FUNC', '(41) 99999-9990', 10, '1990-10-10'),
+('Gabriel', 'gabriel.cliente@email.com', '7777', '777.777.777-77', 'CLIENTE', '(41) 99999-9997', 7, '1987-07-07'),
+('Daniela', 'daniela.cliente@email.com', '8888', '888.888.888-88', 'CLIENTE', '(41) 99999-9998', 8, '1988-08-08'),
+('Fernando', 'fernando.cliente@email.com', '9999', '999.999.999-99', 'CLIENTE', '(41) 99999-9999', 9, '1989-09-09');
 
 INSERT INTO roupa (preco, prazo, descricao, imagem_descr, imagem)
 VALUES
