@@ -31,6 +31,7 @@ CREATE TABLE usuario (
     dt_nascimento date,
     foreign key (end_id) references endereco(id)
 );
+
 CREATE TABLE roupa (
     id INT PRIMARY KEY auto_increment,
     preco DECIMAL(10, 2),
@@ -39,6 +40,7 @@ CREATE TABLE roupa (
     imagem longtext,
     imagem_descr varchar(255)
 );
+
 -- Table for orders
 CREATE TABLE pedido (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -66,29 +68,45 @@ drop table roupa;
 drop table pedido;
 drop table pedido_roupa;
 show tables;
+
 INSERT INTO endereco (cep, logradouro, complemento, bairro, localidade, uf, ibge, gia, ddd, siaf, numero)
 VALUES
-('80540-400', 'Avenida Anita Garibaldi', 'de 222 a 1344 - lado par', 'Cabral', 'Curitiba', 'PR', 4106902, null, 41, 7535, '900'),
-('70000-000', 'Rua das Flores', 'Apto 301', 'Centro', 'Brasília', 'DF', 5300108, null, 61, 9701, '123'),
-('04101-300', 'Avenida Paulista', 'Sala 502', 'Bela Vista', 'São Paulo', 'SP', 3550308, null, 11, 7107, '789'),
-('50000-000', 'Rua do Recife', 'Casa 42', 'Boa Viagem', 'Recife', 'PE', 2611606, null, 81, 2498, '567'),
-('20000-000', 'Avenida Rio Branco', 'Loja 15', 'Centro', 'Rio de Janeiro', 'RJ', 3304557, null, 21, 6001, '321'),
-('83010-160', 'Rua Irati', 'de 222 a 1344 - lado par', 'Cruzeiro', 'São José dos Pinhais', 'PR', 4125506, null, 41, 7885, '56'),
-('85015-100', 'Travessa Social', '65', 'Santa Cruz', 'Guarapuava', 'PR', 4109401, null, 42, 7583, '65'),
-('83010-160', 'Rua Irati', 'casa', 'Cruzeiro', 'São José dos Pinhais', 'PR', 4125506, null, 41, 7885, '12');
+('80230-001', 'Rua Paranaguá', 'Apto 101', 'Centro', 'Curitiba', 'PR', 4106902, 1234, 41, 7535, '456'),
+('71020-001', 'Avenida W3 Sul', 'Bloco C', 'Asa Sul', 'Brasília', 'DF', 5300108, 5678, 61, 9701, '789'),
+('04503-001', 'Rua Oscar Freire', 'Conjunto 205', 'Cerqueira César', 'São Paulo', 'SP', 3550308, 9101, 11, 7107, '101'),
+('51020-001', 'Avenida da Paz', 'Casa 55', 'Pantanal', 'Cuiabá', 'MT', 5103403, 2468, 65, 2498, '222'),
+('22041-001', 'Rua Coelho Rodrigues', 'Loja 10', 'Centro', 'Teresina', 'PI', 2211001, 1357, 86, 5120, '789'),
+('86020-001', 'Avenida Higienópolis', 'Sala 301', 'Zona 01', 'Londrina', 'PR', 4113700, 9753, 43, 6892, '456'),
+('87020-001', 'Rua Maringá', 'Casa 30', 'Zona 03', 'Maringá', 'PR', 4115200, 3579, 44, 5210, '789'),
+('33010-001', 'Avenida Amaral Peixoto', 'Apartamento 15', 'Centro', 'Niterói', 'RJ', 3303302, 8642, 21, 6001, '101'),
+('79002-001', 'Rua Barão do Rio Branco', 'Sala 502', 'Centro', 'Campo Grande', 'MS', 5002704, 9753, 67, 3456, '222'),
+('57020-001', 'Avenida Fernandes Lima', 'Loja 30', 'Farol', 'Maceió', 'AL', 2704302, 3579, 82, 6523, '789');
 
 INSERT INTO usuario (nome, login, senha, salt, cpf, perfil, telefone, end_id, dt_nascimento)
 VALUES
-('Maria', 'maria.funcionaria@email.com', '1111', '111.111.111-11', 'FUNC', '(41) 99999-9991', 1, '1991-01-01'),
-('Mário', 'mario.funcionario@email.com', '2222', '222.222.222-22', 'FUNC', '(41) 99999-9992', 2, '1992-02-02'),
-('João', 'joao.cliente@email.com', '3333', '333.333.333-33', 'CLIENTE', '(41) 99999-9993', 3, '1993-03-03'),
-('José', 'jose.cliente@email.com', '4444', '444.444.444-44', 'CLIENTE', '(41) 99999-9994', 4, '1994-04-04'),
-('Joana', 'joana.cliente@email.com', '5555', '555.555.555-55', 'CLIENTE', '(41) 99999-9995', 5, '1995-05-05'),
-('Joaquina', 'joaquina.cliente@email.com', '6666', '666.666.666-66', 'CLIENTE', '(41) 99999-9996', 6, '1996-06-06'),
-('Lucas', 'lucas.funcionario@email.com', '0000', '000.000.000-00', 'FUNC', '(41) 99999-9990', 10, '1990-10-10'),
-('Gabriel', 'gabriel.cliente@email.com', '7777', '777.777.777-77', 'CLIENTE', '(41) 99999-9997', 7, '1987-07-07'),
-('Daniela', 'daniela.cliente@email.com', '8888', '888.888.888-88', 'CLIENTE', '(41) 99999-9998', 8, '1988-08-08'),
-('Fernando', 'fernando.cliente@email.com', '9999', '999.999.999-99', 'CLIENTE', '(41) 99999-9999', 9, '1989-09-09');
+('Maria', 'maria.funcionaria@email.com', 'M9yRMYA60JRJve+cG2gmfvVE54SGbvrzUY6ABEZxAzU=', 'WApEQkqlOb+W3vWRgga8GA==', '111.111.111-11', 'FUNC', '(41) 99999-9991', 1, '1991-01-01'),
+('Mário', 'mario.funcionario@email.com', 'z7cTpg+PInbD1TES/ks9ckMjwewKgLZQMxLsSAjETgw=', 'UEYad20oWEdq4an/xRuJdg==', '222.222.222-22', 'FUNC', '(41) 99999-9992', 2, '1992-02-02'),
+('João', 'joao.cliente@email.com', '8BH/ZUsvqvu++F4PPieBOtkyx4wwNICt+UPqwPchvoA=', 'pm1tTC31OBGGMJ5XT4px1Q==', '333.333.333-33', 'CLIENTE', '(41) 99999-9993', 3, '1993-03-03'),
+('José', 'jose.cliente@email.com', 'NzTai0KvXcl5tDI9Ty886lO5WO57tkTEcHv+YkyC8As=', 'kXbsJxDxPM3vCWZNhCtQOQ==', '444.444.444-44', 'CLIENTE', '(41) 99999-9994', 4, '1994-04-04'),
+('Joana', 'joana.cliente@email.com', 'aNX28C0aDG2ReNCXq0VaC3Ly7bXerjVGE4mgH/xqSSg=', 'NZo4j70rWe1NzVM8kthNKA==', '555.555.555-55', 'CLIENTE', '(41) 99999-9995', 5, '1995-05-05'),
+('Joaquina', 'joaquina.cliente@email.com', 'DDYRcrY41SoQuildCAlse5nJ3rpVpEf1YmXJrI1g9RQ=', 'ImNemV4i7kBIDkQxc+Yf+g==', '666.666.666-66', 'CLIENTE', '(41) 99999-9996', 6, '1996-06-06'),
+('Lucas', 'lucas.funcionario@email.com', 'YfwJRydIYfEuP+/k0LGkEO0wN7lApeSEhKtACVJLjCI=', 'pCQ1iV5ujUMs8CO2FjRzeQ==', '000.000.000-00', 'FUNC', '(41) 99999-9990', 10, '1990-10-10'),
+('Gabriel', 'gabriel.cliente@email.com', '2MY7LzVf+bb3+OSmCqE/W+IVYJY5VOp5RowNoD6CfXs=', '2IBhnuPE+cT1/oGWFnxctg==', '777.777.777-77', 'CLIENTE', '(41) 99999-9997', 7, '1987-07-07'),
+('Daniela', 'daniela.cliente@email.com', 'Qp61sb9d1m07ottz2mCK+uXD7JCIDmFrGQDPTZsuhQc=', 'igBf/Y3h5T4wXrhGxC4RKA==', '888.888.888-88', 'CLIENTE', '(41) 99999-9998', 8, '1988-08-08'),
+('Fernando', 'fernando.cliente@email.com', 'uoork1QrnBUazjwsrTueo4w+RbKuyqIc1P3yqIXs4Rc=', 'KChszXE8J/ZE8AAd71hgWg==', '999.999.999-99', 'CLIENTE', '(41) 99999-9999', 9, '1989-09-09');
+
+/* SENHAS:
+1) maria.funcionaria@email.com: 1012;
+2) mario.funcionario@email.com: 1271;
+3) joao.cliente@email.com: 9767;
+4) jose.cliente@email.com: 9751;
+5) joana.cliente@email.com: 1378;
+6) joaquina.cliente@email.com: 7626;
+7) lucas.funcionario@email.com: 1740;
+8) gabriel.cliente@email.com: 5905;
+9) daniela.cliente@email.com: 3793;
+10) fernando.cliente@email.com: 3997.
+*/
 
 INSERT INTO roupa (preco, prazo, descricao, imagem_descr, imagem)
 VALUES
