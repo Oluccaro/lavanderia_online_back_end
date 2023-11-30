@@ -27,6 +27,7 @@ public class ClienteREST {
     return repoUsuario
            .findAll()
            .stream()
+           .filter(u -> u.getPerfil().equals("CLIENTE"))
            .map(u -> mapper.map(u, UsuarioDTO.class))
            .collect(Collectors.toList());
   }
