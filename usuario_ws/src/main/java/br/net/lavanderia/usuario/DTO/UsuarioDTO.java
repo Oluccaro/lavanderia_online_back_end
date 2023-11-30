@@ -92,9 +92,4 @@ public class UsuarioDTO implements Serializable {
   public void setDtNascimento(String dtNascimento) {
     this.dtNascimento = dtNascimento;
   }
-
-
-  // private int gerarSenha(){
-  //   return (int)(Math.random()*8999) + 1000;
-  // }
 }

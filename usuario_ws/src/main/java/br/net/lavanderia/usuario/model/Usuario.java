@@ -19,6 +19,9 @@ public class Usuario implements Serializable{
   @Column(name="senha")
   private String senha;
 
+  @Column(name="salt")
+  private String salt;
+
   @Column(name="perfil")
   private String perfil;
 
@@ -67,6 +70,14 @@ public class Usuario implements Serializable{
     this.senha = senha;
   }
 
+  public String getSalt() {
+    return salt;
+  }
+
+  public void setSalt(String salt) {
+    this.salt = salt;
+  }
+
   public String getPerfil() {
     return perfil;
   }
@@ -107,4 +118,7 @@ public class Usuario implements Serializable{
     this.dtNascimento = dtNascimento;
   }
 
+  public static Integer gerarSenha(){
+    return (int)(Math.random()*8999) + 1000;
+  }
 }
