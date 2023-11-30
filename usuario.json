@@ -1,0 +1,92 @@
+[
+    {
+        "nome": "Maria",
+        "login": "maria.funcionaria@email.com",
+        "cpf": "111.111.111-11",
+        "perfil": "FUNC",
+        "telefone": "(41) 99999-9991",
+        "endereco": 1,
+        "dtNascimento": "1991-01-01"
+    },
+    {
+        "nome": "Mário",
+        "login": "mario.funcionario@email.com",
+        "cpf": "222.222.222-22",
+        "perfil": "FUNC",
+        "telefone": "(41) 99999-9992",
+        "endereco": 2,
+        "dtNascimento": "1992-02-02"
+    },
+    {
+        "nome": "João",
+        "login": "joao.cliente@email.com",
+        "cpf": "333.333.333-33",
+        "perfil": "CLIENTE",
+        "telefone": "(41) 99999-9993",
+        "endereco": 3,
+        "dtNascimento": "1993-03-03"
+    },
+    {
+        "nome": "José",
+        "login": "jose.cliente@email.com",
+        "cpf": "444.444.444-44",
+        "perfil": "CLIENTE",
+        "telefone": "(41) 99999-9994",
+        "endereco": 4,
+        "dtNascimento": "1994-04-04"
+    },
+    {
+        "nome": "Joana",
+        "login": "joana.cliente@email.com",
+        "cpf": "555.555.555-55",
+        "perfil": "CLIENTE",
+        "telefone": "(41) 99999-9995",
+        "endereco": 5,
+        "dtNascimento": "1995-05-05"
+    },
+    {
+        "nome": "Joaquina",
+        "login": "joaquina.cliente@email.com",
+        "cpf": "666.666.666-66",
+        "perfil": "CLIENTE",
+        "telefone": "(41) 99999-9996",
+        "endereco": 6,
+        "dtNascimento": "1996-06-06"
+    },
+    {
+        "nome": "Lucas",
+        "login": "lucas.funcionario@email.com",
+        "cpf": "000.000.000-00",
+        "perfil": "FUNC",
+        "telefone": "(41) 99999-9990",
+        "endereco": 10,
+        "dtNascimento": "1990-10-10"
+    },
+    {
+        "nome": "Gabriel",
+        "login": "gabriel.cliente@email.com",
+        "cpf": "777.777.777-77",
+        "perfil": "CLIENTE",
+        "telefone": "(41) 99999-9997",
+        "endereco": 7,
+        "dtNascimento": "1987-07-07"
+    },
+    {
+        "nome": "Daniela",
+        "login": "daniela.cliente@email.com",
+        "cpf": "888.888.888-88",
+        "perfil": "CLIENTE",
+        "telefone": "(41) 99999-9998",
+        "endereco": 8,
+        "dtNascimento": "1988-08-08"
+    },
+    {
+        "nome": "Fernando",
+        "login": "fernando.cliente@email.com",
+        "cpf": "999.999.999-99",
+        "perfil": "CLIENTE",
+        "telefone": "(41) 99999-9999",
+        "endereco": 9,
+        "dtNascimento": "1989-09-09"
+    }
+]

@@ -1,0 +1,42 @@
+[
+    {
+        "login": "maria.funcionaria@email.com",
+        "senha": "1012"
+    },
+    {
+        "login": "mario.funcionario@email.com",
+        "senha": "1271"
+    },
+    {
+        "login": "joao.cliente@email.com",
+        "senha": "9767"
+    },
+    {
+        "login": "jose.cliente@email.com",
+        "senha": "9751"
+    },
+    {
+        "login": "joana.cliente@email.com",
+        "senha": "1378"
+    },
+    {
+        "login": "joaquina.cliente@email.com",
+        "senha": "7626"
+    },
+    {
+        "login": "lucas.funcionario@email.com",
+        "senha": "1740"
+    },
+    {
+        "login": "gabriel.cliente@email.com",
+        "senha": "5905"
+    },
+    {
+        "login": "daniela.cliente@email.com",
+        "senha": "3793"
+    },
+    {
+        "login": "fernando.cliente@email.com",
+        "senha": "3997"
+    }
+]
