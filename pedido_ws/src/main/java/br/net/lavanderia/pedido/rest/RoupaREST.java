@@ -1,5 +1,4 @@
 package br.net.lavanderia.pedido.rest;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.net.lavanderia.pedido.DTO.RoupaDTO;
 import br.net.lavanderia.pedido.DTO.RoupaDTO;
 import br.net.lavanderia.pedido.model.Roupa;
 import br.net.lavanderia.pedido.repository.RoupaRepository;

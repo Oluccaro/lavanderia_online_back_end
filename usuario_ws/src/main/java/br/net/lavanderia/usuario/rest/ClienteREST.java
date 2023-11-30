@@ -1,28 +1,33 @@
-// package br.net.lavanderia.usuario.rest;
+package br.net.lavanderia.usuario.rest;
 
-// import java.util.stream.Collectors;
+import java.util.List;
+import java.util.stream.Collectors;
 
-// import org.springframework.web.bind.annotation.GetMapping;
-// import org.springframework.web.bind.annotation.PathVariable;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-// import br.net.lavanderia.usuario.DTO.UsuarioDTO;
-// import br.net.lavanderia.usuario.model.Usuario;
+import br.net.lavanderia.usuario.DTO.UsuarioDTO;
+import br.net.lavanderia.usuario.repository.UsuarioRepository;
 
-// public class ClienteREST {
-//   @GetMapping("/cliente")
-//   public List<UsuarioDTO> listarTodos(){
-//     List<Usuario> lista = repo.findAll();
-//     return lista.stream()
-//                 .filter(usu -> usu.getPerfil().equals("CLIENTE"))
-//                 .map(e -> mapper.map(e, UsuarioDTO.class))
-//                 .collect(Collectors.toList());
-//   }
+@CrossOrigin
+@RestController
+public class ClienteREST {
 
-//   @GetMapping("/usuarios/{id}")
-//   public UsuarioDTO getUsuarioById(@PathVariable("id") int id){
-//     return repo.findAll().stream()
-//             .filter(usu -> usu.getId() == id)
-//             .map(e -> mapper.map(e, UsuarioDTO.class))
-//             .findAny().orElse(null);
-//   }
-// }
+  @Autowired
+  UsuarioRepository repoUsuario;
+
+  @Autowired
+  ModelMapper mapper;
+
+  @GetMapping("/clientes")
+  public List<UsuarioDTO> listarTodos(){
+    return repoUsuario
+           .findAll()
+           .stream()
+           .map(u -> mapper.map(u, UsuarioDTO.class))
+           .collect(Collectors.toList());
+  }
+}

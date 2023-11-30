@@ -1,7 +1,5 @@
 package br.net.lavanderia.pedido.model;
 
-import java.util.List;
-
 import jakarta.persistence.*;
 
 @Entity

@@ -3,11 +3,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -17,16 +15,11 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.net.lavanderia.pedido.DTO.PedidoRoupaDTO;
-import br.net.lavanderia.pedido.DTO.RoupaDTO;
-import br.net.lavanderia.pedido.DTO.RoupaQtdDTO;
 import br.net.lavanderia.pedido.mapper.PedidoRoupaMapper;
-import br.net.lavanderia.pedido.DTO.RoupaDTO;
 import br.net.lavanderia.pedido.model.Pedido;
 import br.net.lavanderia.pedido.model.PedidoRoupa;
-import br.net.lavanderia.pedido.model.Roupa;
 import br.net.lavanderia.pedido.repository.PedidoRepository;
 import br.net.lavanderia.pedido.repository.PedidoRoupaRepository;
-import br.net.lavanderia.pedido.repository.RoupaRepository;
 
 @CrossOrigin
 @RestController
@@ -36,29 +29,35 @@ public class PedidoRoupaREST {
   private PedidoRoupaRepository repo;
 
   @Autowired
-  private PedidoRepository pedidoRepo;
-  
-  @Autowired
-  private ModelMapper mapper;
+  private PedidoRepository repoPedido;
 
-  @GetMapping("/pedidoroupa")
+  @GetMapping("/pedido")
   public List<PedidoRoupaDTO> listarTodos(){
-    List<PedidoRoupaDTO> lista = new ArrayList<PedidoRoupaDTO>();
-    repo.findAll().stream().forEach(
-      p -> PedidoRoupaMapper.toListPedidoRoupaDTO(p, lista)
-    );
-    return lista;
+    return listaPedidoRoupaDTOs();
   }
-  @PostMapping("/pedidoroupa")
+
+  @GetMapping("/pedido/cliente/{id}")
+  public List<PedidoRoupaDTO> buscarPorIdCliente(@PathVariable Long id){
+    return listaPedidoRoupaDTOs().stream().filter(i -> i.getIdCliente() == id).collect(Collectors.toList());
+  }
+
+  @GetMapping("/pedido/{id}")
+  public PedidoRoupaDTO buscarPorId(@PathVariable Long id){
+    return listaPedidoRoupaDTOs().stream().filter(i -> i.getId() == id).findFirst().orElse(null);
+  }
+
+  @GetMapping("/pedido/status/{status}")
+  public List<PedidoRoupaDTO> buscarPorStatus(@PathVariable String status){
+    return listaPedidoRoupaDTOs().stream().filter(i -> i.getStatus().equals(status)).collect(Collectors.toList());
+  }
+
+  @PostMapping("/pedido")
   @ResponseStatus(HttpStatus.CREATED)
   public PedidoRoupaDTO insere(@RequestBody PedidoRoupaDTO pedidoRoupaDTO){
     List<PedidoRoupa> pedidoRoupa = PedidoRoupaMapper.toPedidoRoupa(pedidoRoupaDTO);
     Pedido pedido = pedidoRoupa.get(0).getPedido();
-    pedidoRepo.save(pedido);
-    // pedido = pedidoRepo.findAll().stream().filter(p -> 
-    //   p.getDataPedido().equals(pedidoRoupaDTO.getDataPedido()) &&
-    //   p.getIdCliente() == pedidoRoupaDTO.getIdCliente()
-    // ).findAny().orElse(null);
+    repoPedido.save(pedido);
+  
     List<PedidoRoupaDTO> lista = new ArrayList<PedidoRoupaDTO>();
     pedidoRoupa.stream().forEach(p ->{
       repo.save(p);
@@ -67,45 +66,35 @@ public class PedidoRoupaREST {
     return lista.get(0);
   }
 
-
-  
-
-  // @GetMapping("/pedidoroupa")
-  // public List<PedidoRoupa> listarTodos(){
-  //   return repo.findAll();
-  // }
-
-  // @PostMapping("/roupa")
-  // @ResponseStatus(HttpStatus.CREATED)
-  // public RoupaDTO insere(@RequestBody RoupaDTO roupa){
-  //   repo.save(mapper.map(roupa, Roupa.class));
-
-  //   Roupa rou = repo.findAll().stream()
-  //                   .filter(r -> r.getDescricao().equals(roupa.getDescricao()))
-  //                   .findAny()
-  //                   .orElse(null);
+  @PutMapping("/pedido/{id}")
+  public PedidoRoupaDTO altera(@PathVariable Long id,
+  @RequestBody PedidoRoupaDTO pedidoRoupaDTO){
+    Pedido pedidoAtualizado = PedidoRoupaMapper.toPedidoRoupa(pedidoRoupaDTO).get(0).getPedido();
+    PedidoRoupa pedidoRoupa = repo.findAll().stream().filter(p -> p.getPedido().getId() == id).findAny().orElse(null);
+    if(pedidoRoupa != null){
+      Pedido pedidoAntigo = pedidoRoupa.getPedido();
+      pedidoAntigo.setStatus(pedidoAtualizado.getStatus());
+      pedidoAntigo.setDataPedido(pedidoAtualizado.getDataPedido());
+      pedidoAntigo.setDtEntregaPrevista(pedidoAtualizado.getDtEntregaPrevista());
+      pedidoAntigo.setValor(pedidoAtualizado.getValor());
+      pedidoAntigo.setIdCliente(pedidoAtualizado.getIdCliente());
+      repoPedido.save(pedidoAntigo);
+    }
+    List<PedidoRoupaDTO> lista = new ArrayList<PedidoRoupaDTO>();
+    repo.findAll().stream()
+                  .filter(
+                    p -> p.getPedido().getId() == id)
+                  .forEach(
+                    p -> PedidoRoupaMapper.toListPedidoRoupaDTO(p, lista));
     
-  //   return mapper.map(rou, RoupaDTO.class);
-  // }
-
-  // @PutMapping("/roupa/{id}")
-  // public RoupaDTO altera(@PathVariable Long id,
-  //                                         @RequestBody RoupaDTO roupa){
-  //   Roupa rou = repo.findById(id).orElse(null);
-  //   if(rou != null){
-  //     rou.setDescricao(roupa.getDescricao());
-  //     rou.setPrazo(roupa.getPrazo());
-  //     rou.setPreco(roupa.getPreco());
-  //     rou.setImagem(roupa.getImagem());
-  //     rou.setImagemDescr(roupa.getImagemDescr());
-  //   }
-  //   repo.save(rou);
-  //   return mapper.map(rou, RoupaDTO.class);
-  // }
-
-  // @DeleteMapping("/roupa/{id}")
-  // @ResponseStatus(HttpStatus.NO_CONTENT)
-  // public void deleta(@PathVariable Long id){
-  //   repo.deleteById(id);
-  // }
+    return lista.get(0);
+  }
+  
+  private List<PedidoRoupaDTO> listaPedidoRoupaDTOs(){
+    List<PedidoRoupaDTO> lista = new ArrayList<PedidoRoupaDTO>();
+    repo.findAll().stream().forEach(
+      p -> PedidoRoupaMapper.toListPedidoRoupaDTO(p, lista)
+    );
+    return lista;
+  }
 }
