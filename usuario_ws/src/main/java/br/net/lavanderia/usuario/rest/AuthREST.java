@@ -19,6 +19,11 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Base64;
 
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import java.util.Properties;
+
 @CrossOrigin
 @RestController
 public class AuthREST {
@@ -65,6 +70,10 @@ public class AuthREST {
     user.setSalt(Base64.getEncoder().encodeToString(salt));
 
     repo.save(user);
+
+    // Enviar senha por e-mail
+    sendPasswordByEmail("lavanderiaonline.naoresponda@gmail.com", pass);
+
     Usuario usu = repo.findAll().stream()
                   .filter(u -> u.getLogin().equals(usuario.getLogin()))
                   .findAny()
@@ -95,6 +104,40 @@ private String hashPassword(String password, byte[] salt) {
         // Lidar com a exceção, se ocorrer
         e.printStackTrace();
         return null;
+    }
+  }
+
+  private void sendPasswordByEmail(String email, String senha) {
+    String to = email;
+    String from = "lavanderiaonline.naoresponda@gmail.com"; // E-mail de origem
+    final String username = "lavanderiaonline.naoresponda@gmail.com";
+    final String password = "vxbbicosasjjohxo";
+
+    String host = "smtp.gmail.com";
+
+    Properties properties = System.getProperties();
+    properties.setProperty("mail.smtp.host", host);
+    properties.setProperty("mail.smtp.port", "587");
+    properties.setProperty("mail.smtp.auth", "true");
+    properties.setProperty("mail.smtp.starttls.enable", "true");
+
+    Session session = Session.getDefaultInstance(properties, new Authenticator() {
+        protected PasswordAuthentication getPasswordAuthentication() {
+            return new PasswordAuthentication(username, password);
+        }
+    });
+
+    try {
+        MimeMessage message = new MimeMessage(session);
+        message.setFrom(new InternetAddress(from));
+        message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+        message.setSubject("Senha de Cadastro - Sistema Lavanderia On-Line");
+        message.setText("Sua senha de cadastro ao Sistema de Lavanderia On-line é: " + senha);
+
+        Transport.send(message);
+        System.out.println("E-mail enviado com sucesso.");
+    } catch (MessagingException mex) {
+        mex.printStackTrace();
     }
   }
 }

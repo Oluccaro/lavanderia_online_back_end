@@ -21,7 +21,7 @@ CREATE TABLE endereco (
 CREATE TABLE usuario (
 	id INT PRIMARY KEY auto_increment,
     nome VARCHAR(255),
-    login VARCHAR(255) unique,
+    login VARCHAR(255),
 	senha VARCHAR(255),
     salt VARCHAR(512),
     cpf VARCHAR(14),
@@ -110,11 +110,11 @@ VALUES
 
 INSERT INTO roupa (preco, prazo, descricao, imagem_descr, imagem)
 VALUES
-(17.5, 5, 'Calça', 'calca.png', ""),
-(15, 5, 'Camisa', 'camisa.png', ""),
-(12.5, 3, 'Camiseta', 'camiseta.png', ""),
-(10, 2, 'Meia', 'meia.png', ""),
-(10, 2, 'Cueca', 'cueca.png', "");
+(17.5, 15, 'Calça', 'calca.png', ""),
+(15, 15, 'Camisa', 'camisa.png', ""),
+(12.5, 15, 'Camiseta', 'camiseta.png', ""),
+(10, 15, 'Meia', 'meia.png', ""),
+(10, 15, 'Cueca', 'cueca.png', "");
 
 INSERT INTO pedido (status, valor, dt_pedido, dt_entrega_prevista, id_cliente)
 VALUES 
