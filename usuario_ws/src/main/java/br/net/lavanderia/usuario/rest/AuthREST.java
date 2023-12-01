@@ -3,12 +3,18 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.tomcat.util.json.JSONParser;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.json.GsonJsonParser;
+import org.springframework.boot.json.JsonParser;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.google.gson.Gson;
 
 import br.net.lavanderia.usuario.DTO.UsuarioDTO;
 import br.net.lavanderia.usuario.model.Login;
@@ -56,7 +62,9 @@ public class AuthREST {
   public UsuarioDTO createUsuario(@RequestBody UsuarioDTO usuario){
 
     Usuario user = mapper.map(usuario, Usuario.class);
-
+    Gson gson = new Gson();
+    String json = gson.toJson(user);
+    System.out.println(json);
     // Gerar senha aleatoria para o UsuarioDTO
     String pass = Integer.toString(Usuario.gerarSenha());
 
@@ -72,7 +80,7 @@ public class AuthREST {
     repo.save(user);
 
     // Enviar senha por e-mail
-    sendPasswordByEmail("lavanderiaonline.naoresponda@gmail.com", pass);
+    sendPasswordByEmail(user.getLogin(), pass);
 
     Usuario usu = repo.findAll().stream()
                   .filter(u -> u.getLogin().equals(usuario.getLogin()))
