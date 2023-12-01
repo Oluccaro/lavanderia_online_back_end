@@ -7,6 +7,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.net.lavanderia.usuario.DTO.UsuarioDTO;
@@ -22,7 +23,7 @@ public class ClienteREST {
   @Autowired
   ModelMapper mapper;
 
-  @GetMapping("/clientes")
+  @GetMapping("/relatorio/cliente")
   public List<UsuarioDTO> listarTodos(){
     return repoUsuario
            .findAll()
@@ -30,5 +31,10 @@ public class ClienteREST {
            .filter(u -> u.getPerfil().equals("CLIENTE"))
            .map(u -> mapper.map(u, UsuarioDTO.class))
            .collect(Collectors.toList());
+  }
+
+  @GetMapping("/cliente/{id}")
+  public UsuarioDTO buscarPorId(@PathVariable Long id){
+    return mapper.map(repoUsuario.findById(id).orElse(null), UsuarioDTO.class);
   }
 }
