@@ -2,23 +2,19 @@ package br.net.lavanderia.pedido.rest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -45,26 +41,34 @@ public class PedidoRoupaREST {
 
   @Autowired
   private PedidoRepository repoPedido;
-
+//get funcionario todos
   @GetMapping("/pedido")
   public List<PedidoRoupaDTO> listarTodos(){
     return listaPedidoRoupaDTOs();
   }
-
+//get funcionario por status
+  @GetMapping("/pedido/status/{status}")
+  public List<PedidoRoupaDTO> buscarPorStatus(@PathVariable String status){
+    return listaPedidoRoupaDTOs().stream().filter(i -> i.getStatus().equals(status)).collect(Collectors.toList());
+  }
+//get cliente todos
   @GetMapping("/pedido/cliente/{id}")
   public List<PedidoRoupaDTO> buscarPorIdCliente(@PathVariable Long id){
     return listaPedidoRoupaDTOs().stream().filter(i -> i.getIdCliente() == id).collect(Collectors.toList());
   }
-
+//get cliente status (NÃO FUNCIONA - ALGUMA IDEIA?)
+  @GetMapping("/pedido/cliente/{id}/{status}")
+  public List<PedidoRoupaDTO> buscarPorClienteEStatus(@PathVariable Long id, @PathVariable String status){
+    return listaPedidoRoupaDTOs().stream().filter(i -> i.getIdCliente() == id && i.getStatus().equals(status)) 
+    .collect(Collectors.toList());
+  }
+// esse era bom limitar por cliente também 
   @GetMapping("/pedido/{id}")
   public PedidoRoupaDTO buscarPorId(@PathVariable Long id){
     return listaPedidoRoupaDTOs().stream().filter(i -> i.getId() == id).findFirst().orElse(null);
   }
 
-  @GetMapping("/pedido/status/{status}")
-  public List<PedidoRoupaDTO> buscarPorStatus(@PathVariable String status){
-    return listaPedidoRoupaDTOs().stream().filter(i -> i.getStatus().equals(status)).collect(Collectors.toList());
-  }
+
 
   @PostMapping("/pedido")
   @ResponseStatus(HttpStatus.CREATED)

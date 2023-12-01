@@ -192,8 +192,11 @@ select * from endereco;
 select * from roupa;
 
 GRANT ALL PRIVILEGES ON lavanderia TO 'lavanderia_user'@'localhost';
+
+-- Grant privileges on each table
 GRANT SELECT, INSERT, UPDATE, DELETE ON lavanderia.endereco TO 'lavanderia_user'@'localhost';
 GRANT SELECT, INSERT, UPDATE, DELETE ON lavanderia.pedido TO 'lavanderia_user'@'localhost';
 GRANT SELECT, INSERT, UPDATE, DELETE ON lavanderia.pedido_roupa TO 'lavanderia_user'@'localhost';
 GRANT SELECT, INSERT, UPDATE, DELETE ON lavanderia.roupa TO 'lavanderia_user'@'localhost';
 GRANT SELECT, INSERT, UPDATE, DELETE ON lavanderia.usuario TO 'lavanderia_user'@'localhost';
+
