@@ -1,0 +1,17 @@
+{
+  "status": "FINALIZADO",
+  "valor": 70.0,
+  "dataPedido": "2023-01-01",
+  "dtEntregaPrevista": "2023-01-16",
+  "idCliente": 3,
+  "roupas": [
+      {
+          "preco": 17.5,
+          "prazo": 15,
+          "descricao": "Calça",
+          "imagemDescr": "calca.png",
+          "imagem": "",
+          "quantidade": 4
+      }
+  ]
+}
