@@ -41,7 +41,6 @@ CREATE TABLE roupa (
     imagem_descr varchar(255)
 );
 
--- Table for orders
 CREATE TABLE pedido (
     id INT PRIMARY KEY AUTO_INCREMENT,
     status VARCHAR(50),
@@ -52,7 +51,6 @@ CREATE TABLE pedido (
     foreign key (id_cliente) references usuario(id)
 );
 
--- Junction table for the many-to-many relationship
 CREATE TABLE pedido_roupa (
 	id int primary key auto_increment,
     id_pedido INT,
@@ -193,14 +191,9 @@ select * from usuario;
 select * from endereco;
 select * from roupa;
 
-grant all privileges on endereco to lavanderia_user;
-
 GRANT ALL PRIVILEGES ON lavanderia TO 'lavanderia_user'@'localhost';
-
-flush privileges;
-
--- Grant privileges on the Usuario table
-GRANT SELECT, INSERT, UPDATE, DELETE ON lavanderia.usuario TO 'lavanderia_user'@'localhost';
-
--- Grant privileges on the Endereco table
 GRANT SELECT, INSERT, UPDATE, DELETE ON lavanderia.endereco TO 'lavanderia_user'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE ON lavanderia.pedido TO 'lavanderia_user'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE ON lavanderia.pedido_roupa TO 'lavanderia_user'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE ON lavanderia.roupa TO 'lavanderia_user'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE ON lavanderia.usuario TO 'lavanderia_user'@'localhost';
